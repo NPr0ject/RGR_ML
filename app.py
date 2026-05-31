@@ -32,7 +32,7 @@ st.set_page_config(
 st.sidebar.title(" Навигация")
 page = st.sidebar.radio(
     "Выберите страницу:",
-    ["О разработчике", " О наборе данных", " Визуализации", " Инференс моделей"],
+    ["👤 О разработчике", " О наборе данных", "📈 Визуализации", "🤖 Инференс моделей"],
     index=0
 )
 
@@ -109,7 +109,7 @@ if page == "👤 О разработчике":
         st.markdown("**Группа:** МО-241")
 
         st.markdown("---")
-        st.markdown("### РГР")
+        st.markdown("###РГР")
         st.markdown(
             """
             **«Разработка Web-приложения (дашборда) для инференса моделей ML
@@ -229,16 +229,18 @@ elif page == " О наборе данных":
 # ============================================================
 # СТРАНИЦА 3: Визуализации
 # ============================================================
-elif page == "Визуализации":
-    st.title("Визуализации зависимостей в наборе данных")
+elif page == "📈 Визуализации":
+    st.title("📈 Визуализации зависимостей в наборе данных")
 
     df = load_dataset()
 
     if df is not None:
+        # Нормализуем fraud к int (может быть bool, float, object)
         df['fraud'] = df['fraud'].astype(int)
 
         COLORS = ['#2ecc71', '#e74c3c']
 
+        # ---- Визуализация 1: Распределение целевой переменной ----
         st.markdown("### 1. Распределение целевой переменной (fraud)")
         col1, col2 = st.columns(2)
 
@@ -401,8 +403,8 @@ elif page == "Визуализации":
 # ============================================================
 # СТРАНИЦА 4: Инференс моделей
 # ============================================================
-elif page == "Инференс моделей":
-    st.title("Инференс моделей машинного обучения")
+elif page == "🤖 Инференс моделей":
+    st.title("🤖 Инференс моделей машинного обучения")
 
     models, metrics, scaler, feature_names = load_models()
 
@@ -419,7 +421,7 @@ elif page == "Инференс моделей":
 
         # Лучшая модель
         best_model_name = max(metrics.keys(), key=lambda k: metrics[k]['F1'])
-        st.success(f" Лучшая модель по F1: **{best_model_name}** (F1 = {metrics[best_model_name]['F1']:.4f})")
+        st.success(f"🏆 Лучшая модель по F1: **{best_model_name}** (F1 = {metrics[best_model_name]['F1']:.4f})")
     else:
         st.info("Метрики недоступны")
 
@@ -441,7 +443,7 @@ elif page == "Инференс моделей":
     st.markdown("### Ввод данных для прогнозирования")
     input_method = st.radio(
         "Способ ввода данных:",
-        [" Ручной ввод признаков", " Загрузка CSV-файла"],
+        ["📋 Ручной ввод признаков", "📁 Загрузка CSV-файла"],
         horizontal=True
     )
 
@@ -449,6 +451,7 @@ elif page == "Инференс моделей":
         st.error("Имена признаков не загружены!")
         st.stop()
 
+    # ---- Описание признаков с единицами измерения ----
     feature_units = {
         'distance_from_home': 'км',
         'distance_from_last_transaction': 'км',
@@ -469,7 +472,8 @@ elif page == "Инференс моделей":
         'online_order': 'Онлайн-заказ (0 — нет, 1 — да)'
     }
 
-    if input_method == " Ручной ввод признаков":
+    # ---- Ручной ввод ----
+    if input_method == "📋 Ручной ввод признаков":
         st.markdown("Введите значения признаков для транзакции:")
 
         input_data = {}
@@ -530,7 +534,7 @@ elif page == "Инференс моделей":
 
                 # Вывод результата
                 st.markdown("---")
-                st.markdown("###  Результат прогнозирования")
+                st.markdown("### 🎯 Результат прогнозирования")
 
                 if prediction == 1:
                     st.error(" **Транзакция классифицирована как МОШЕННИЧЕСКАЯ**")
@@ -550,7 +554,7 @@ elif page == "Инференс моделей":
                         })
                         st.dataframe(prob_df, use_container_width=True, hide_index=True)
 
-                with st.expander(" Введённые значения"):
+                with st.expander("📝 Введённые значения"):
                     display_df = pd.DataFrame([{
                         'Признак': k,
                         'Значение': v,
@@ -559,9 +563,9 @@ elif page == "Инференс моделей":
                     st.dataframe(display_df, use_container_width=True, hide_index=True)
 
     # ---- Загрузка CSV ----
-    elif input_method == " Загрузка CSV-файла":
+    elif input_method == "📁 Загрузка CSV-файла":
         st.markdown("Загрузите CSV-файл с транзакциями для пакетного прогнозирования.")
-        st.info(f" Ожидаемые столбцы: {', '.join(feature_names)}")
+        st.info(f"📋 Ожидаемые столбцы: {', '.join(feature_names)}")
 
         uploaded_file = st.file_uploader(
             "Выберите CSV-файл",
