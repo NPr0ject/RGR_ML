@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Виртуальное окружение
+.venv_rgr/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+screenshots/
+INSTRUCTIONS.md
+# Датасет (тоже большой, ~50-100 МБ)
+new_data_card.csv
+data/
+catboost_info/
+# Локальные файлы
+.DS_Store
+Thumbs.db
+test_corr.png
+test_full_corr.png
+test_mask_corr.png
+
+# Streamlit
+.streamlit/secrets.toml
