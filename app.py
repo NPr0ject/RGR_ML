@@ -108,7 +108,7 @@ if page == " О разработчике":
         st.markdown("**Группа:** МО-241")
 
         st.markdown("---")
-        st.markdown("###РГР")
+        st.markdown("### РГР")
         st.markdown(
             """
             **«Разработка Web-приложения (дашборда) для инференса моделей ML
@@ -420,7 +420,7 @@ elif page == " Инференс моделей":
 
         # Лучшая модель
         best_model_name = max(metrics.keys(), key=lambda k: metrics[k]['F1'])
-        st.success(f"🏆 Лучшая модель по F1: **{best_model_name}** (F1 = {metrics[best_model_name]['F1']:.4f})")
+        st.success(f" Лучшая модель по F1: **{best_model_name}** (F1 = {metrics[best_model_name]['F1']:.4f})")
     else:
         st.info("Метрики недоступны")
 
@@ -564,7 +564,7 @@ elif page == " Инференс моделей":
     # ---- Загрузка CSV ----
     elif input_method == " Загрузка CSV-файла":
         st.markdown("Загрузите CSV-файл с транзакциями для пакетного прогнозирования.")
-        st.info(f"📋 Ожидаемые столбцы: {', '.join(feature_names)}")
+        st.info(f" Ожидаемые столбцы: {', '.join(feature_names)}")
 
         uploaded_file = st.file_uploader(
             "Выберите CSV-файл",
@@ -584,7 +584,7 @@ elif page == " Инференс моделей":
                     st.success(f" Файл загружен: {uploaded_df.shape[0]} транзакций")
 
                     # Показать данные
-                    with st.expander("👀 Предпросмотр загруженных данных"):
+                    with st.expander(" Предпросмотр загруженных данных"):
                         st.dataframe(uploaded_df.head(10), use_container_width=True, hide_index=True)
 
                     # Прогнозирование
@@ -793,9 +793,6 @@ elif page == " Инференс моделей":
                 f" **Модели расходятся!**\n\n"
                 f"-  Легальная: **{n_legal}** из {n_legal + n_fraud} моделей\n"
                 f"-  Мошенническая: **{n_fraud}** из {n_legal + n_fraud} моделей\n\n"
-                f"Это граничный случай: часть признаков указывает на легальную операцию "
-                f"(PIN, повторный магазин), а часть — на мошенничество (онлайн, повышенная сумма, без чипа). "
-                f"Разные алгоритмические семейства по-разному взвешивают эти факторы."
             )
         elif n_fraud == 0:
             st.success(f" Все {n_legal} моделей согласны: транзакция легальная")

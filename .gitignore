@@ -19,7 +19,6 @@ env/
 screenshots/
 INSTRUCTIONS.md
 # Датасет (тоже большой, ~50-100 МБ)
-new_data_card.csv
 data/
 catboost_info/
 # Локальные файлы
