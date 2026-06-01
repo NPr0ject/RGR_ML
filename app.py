@@ -80,14 +80,10 @@ def load_models():
 @st.cache_data
 def load_dataset():
     """Загрузка датасета для визуализаций."""
-    # Пробуем разные пути
-    for path in ['new_data_card.csv', 'data/new_data_card.csv']:
-        if os.path.exists(path):
-            df = pd.read_csv(path)
-            if 'Unnamed: 0' in df.columns:
-                df = df.drop('Unnamed: 0', axis=1)
-            return df
-    return None
+    df = pd.read_csv('new_data_card.csv')
+    if 'Unnamed: 0' in df.columns:
+        df = df.drop('Unnamed: 0', axis=1)
+    return df
 
 
 # ============================================================
