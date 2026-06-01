@@ -281,7 +281,7 @@ elif page == " Визуализации":
         st.markdown("### 2. Корреляционная матрица признаков")
 
         numeric_df = df.select_dtypes(include=[np.number])
-        corr = numeric_df.corr()
+        corr = df.corr()
 
         fig, ax = plt.subplots(figsize=(6, 5))
         sns.heatmap(
