@@ -287,7 +287,7 @@ elif page == " Визуализации":
         sns.heatmap(
             corr,
             annot=True,
-            fmt='.2f',
+            fmt='.1f',
             cmap='RdBu_r',
             center=0,
             square=True,
